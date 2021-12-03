@@ -33,20 +33,39 @@ char get_criteria(int column, int inverse) {
     int zeroes = 0;
     int ones = 0;
     for(int i = 0; i < DIAGNOSTICS; i++) {
-        if(!diags[i].removed) (diags[i].data[column] - 48) ? zeroes++ : ones++;
+        if(!diags[i].removed) diags[i].data[column] - 48 ? zeroes++ : ones++;
     }
-
-    if(inverse) return (zeroes <= ones) ? '0' : '1';
-    return (ones >= zeroes) ? '1' : '0';
+    printf("zeroes: %d\n", zeroes);
+    printf("ones: %d\n", ones);
+    if(inverse) {
+        if(ones == zeroes) {
+            return '0';
+        }
+        if(ones > zeroes) {
+            return '1';
+        } else return '0';
+    } else {
+        if(ones == zeroes) {
+            return '1';
+        }
+        if(ones > zeroes) {
+            return '0';
+        } else return '1';
+    }
 }
 
 void remove_all(int column, char criteria) {
+    printf("%c\n", criteria);
     for(int i = 0; i < DIAGNOSTICS; i++) {
-        if(diags[i].data[column] != criteria && diags[i].removed == 0 && removed_count != (DIAGNOSTICS - 1)) {
+        printf("%d %s\n", diags[i].removed, diags[i].data);
+        if(diags[i].removed) continue;
+        if(removed_count == DIAGNOSTICS - 1) continue;
+        if(diags[i].data[column] != criteria) {
             diags[i].removed = 1;
             removed_count++;
         }
     }
+    printf("----------------------------\n");
 }
 
 void reset() {
@@ -56,28 +75,29 @@ void reset() {
     removed_count = 0;
 }
 
+unsigned long find_stat(int inverse) {
+    for(int i = 0; i < COUNT; i++) {
+        char criteria = get_criteria(i, inverse);
+        remove_all(i, criteria);
+    }
+
+    diagnostic *remaining;
+    for(int i = 0; i < DIAGNOSTICS; i++) {
+        if(!diags[i].removed) {
+            printf("%s\n", "remaining found!");
+            remaining = &diags[i];
+            printf("%s\n", remaining->data);
+        } 
+    }
+    return strtoul(remaining->data, NULL, 2);
+}
+
 int main() {
     load();
-
-    for(int i = 0; i < COUNT; i++) {
-        char criteria = get_criteria(i, 0);
-        printf("%c\n", criteria);
-        remove_all(i, criteria);
-    }
-
-    for(int i = 0; i < DIAGNOSTICS; i++) {
-        if(!(diags[i].removed)) printf("%s\n", diags[i].data); 
-    }
-
+    
+    unsigned long oxygen = find_stat(0);
     reset();
+    unsigned long co2 = find_stat(1);
 
-    for(int i = 0; i < COUNT; i++) {
-        char criteria = get_criteria(i, 1);
-        printf("%c\n", criteria);
-        remove_all(i, criteria);
-    }
-
-    for(int i = 0; i < DIAGNOSTICS; i++) {
-        if(!(diags[i].removed)) printf("%s\n", diags[i].data); 
-    }
+    printf("%lu\n", oxygen * co2);
 }
