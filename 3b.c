@@ -5,11 +5,12 @@
 #define DIAGNOSTICS 1000
 
 typedef struct diagnostic {
-    char removed; 
+    char removed;
     char data[COUNT + 2];
 } diagnostic;
 
-diagnostic diags[DIAGNOSTICS] = {0};
+diagnostic diags[DIAGNOSTICS];
+int removed_count = 0;
 
 void load() {
     FILE *input;
@@ -28,31 +29,55 @@ void load() {
     fclose(input);
 }
 
-int get_criteria(int inverse) {
+char get_criteria(int column, int inverse) {
     int zeroes = 0;
     int ones = 0;
-    for(int j = 0; j < DIAGNOSTICS; j++) {
-        (diags[j].data[i] - 48) ? zeroes++ : ones++;
+    for(int i = 0; i < DIAGNOSTICS; i++) {
+        if(!diags[i].removed) (diags[i].data[column] - 48) ? zeroes++ : ones++;
     }
 
-    if(inverse) return (zeroes >= ones) ? 0 : 1;
-    return (ones >= zeroes) ? 1 : 0;
+    if(inverse) return (zeroes <= ones) ? '0' : '1';
+    return (ones >= zeroes) ? '1' : '0';
+}
+
+void remove_all(int column, char criteria) {
+    for(int i = 0; i < DIAGNOSTICS; i++) {
+        if(diags[i].data[column] != criteria && diags[i].removed == 0 && removed_count != (DIAGNOSTICS - 1)) {
+            diags[i].removed = 1;
+            removed_count++;
+        }
+    }
 }
 
 void reset() {
     for(int i = 0; i < DIAGNOSTICS; i++) {
         diags[i].removed = 0;
     }
+    removed_count = 0;
 }
 
 int main() {
     load();
 
+    for(int i = 0; i < COUNT; i++) {
+        char criteria = get_criteria(i, 0);
+        printf("%c\n", criteria);
+        remove_all(i, criteria);
+    }
+
+    for(int i = 0; i < DIAGNOSTICS; i++) {
+        if(!(diags[i].removed)) printf("%s\n", diags[i].data); 
+    }
+
     reset();
 
     for(int i = 0; i < COUNT; i++) {
-        
+        char criteria = get_criteria(i, 1);
+        printf("%c\n", criteria);
+        remove_all(i, criteria);
     }
 
-    
+    for(int i = 0; i < DIAGNOSTICS; i++) {
+        if(!(diags[i].removed)) printf("%s\n", diags[i].data); 
+    }
 }
