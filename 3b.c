@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #define COUNT 12
 #define DIAGNOSTICS 1000
@@ -35,8 +36,6 @@ char get_criteria(int column, int inverse) {
     for(int i = 0; i < DIAGNOSTICS; i++) {
         if(!diags[i].removed) diags[i].data[column] - 48 ? zeroes++ : ones++;
     }
-    printf("zeroes: %d\n", zeroes);
-    printf("ones: %d\n", ones);
     if(inverse) {
         if(ones == zeroes) {
             return '0';
@@ -55,9 +54,7 @@ char get_criteria(int column, int inverse) {
 }
 
 void remove_all(int column, char criteria) {
-    printf("%c\n", criteria);
     for(int i = 0; i < DIAGNOSTICS; i++) {
-        printf("%d %s\n", diags[i].removed, diags[i].data);
         if(diags[i].removed) continue;
         if(removed_count == DIAGNOSTICS - 1) continue;
         if(diags[i].data[column] != criteria) {
@@ -65,7 +62,6 @@ void remove_all(int column, char criteria) {
             removed_count++;
         }
     }
-    printf("----------------------------\n");
 }
 
 void reset() {
@@ -84,9 +80,7 @@ unsigned long find_stat(int inverse) {
     diagnostic *remaining;
     for(int i = 0; i < DIAGNOSTICS; i++) {
         if(!diags[i].removed) {
-            printf("%s\n", "remaining found!");
             remaining = &diags[i];
-            printf("%s\n", remaining->data);
         } 
     }
     return strtoul(remaining->data, NULL, 2);
