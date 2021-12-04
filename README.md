@@ -6,7 +6,7 @@ Languages planned to use:
 - [x] 1. Python
 - [x] 2. Kotlin
 - [x] 3. C
-- [ ] 4. Typescript
+- [x] 4. Typescript
 - [ ] 5. Scratch
 - [ ] 6. Rust
 - [ ] 7. Dart
