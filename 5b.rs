@@ -23,10 +23,8 @@ impl Segment {
             
             let p1 = Point{x: begin.next()?.parse().ok()?, y: begin.next()?.parse().ok()?};
             let p2 = Point{x: end.next()?.parse().ok()?, y: end.next()?.parse().ok()?};
-
-            if p1.x == p2.x || p1.y == p2.y {
-                segments.push(Segment(p1, p2));
-            }
+            
+            segments.push(Segment(p1, p2));
         }
 
         Some(segments)

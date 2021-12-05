@@ -5,6 +5,8 @@
 # binaries
 3a
 3b
+5a
+5b
 # node stuff
 # i'm not using any libraries other than the ones that come with node, but i need @types/node
 node_modules
