@@ -10,7 +10,7 @@ Languages planned to use:
 - [x] 4. Typescript
 - [x] 5. Rust
 - [x] 6. Dart
-- [ ] 7. Lua
+- [x] 7. Lua
 - [ ] 8. Go
 - [ ] 9. PHP
 - [ ] 10. Swift
@@ -21,5 +21,8 @@ Languages planned to use:
 - [ ] 15. Crystal
 - [ ] 16. Haskell
 - [ ] 17. D
+- [ ] 18. C++
+- [ ] 19. F#
+- [ ] 20. Elixir
 
 ????????
