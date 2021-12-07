@@ -7,28 +7,19 @@ local function parseinput(input)
     return tbl
 end
 
-local function getfuel(dist)
-    local fuel = 0
-    for i = 1, dist, 1 do
-        fuel = fuel + i
-    end
-    return fuel
-end
-
 local crabs = parseinput(io.lines("./input/7.txt")())
 table.sort(crabs)
 local min = crabs[1]
 local max = crabs[#crabs]
 
-local best = -1
+local best = 1e100 -- I don't know of a better way to get the max value
 for i = min, max, 1 do
     local fuel = 0
     for j, crab in ipairs(crabs) do
-        fuel = fuel + getfuel(math.abs(i - crab))
+        local dist = math.abs(i - crab)
+        fuel = fuel + (1 + dist) * dist / 2
     end
-    if best == -1 or fuel < best then
-        best = fuel
-    end
+    best = math.min(best, fuel)
 end
 
-print(best)
+print(math.floor(best))

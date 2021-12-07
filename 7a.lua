@@ -12,15 +12,9 @@ table.sort(crabs)
 local min = crabs[1]
 local max = crabs[#crabs]
 
-local best = -1
-for i = min, max, 1 do
-    local fuel = 0
-    for j, crab in ipairs(crabs) do
-        fuel = fuel + math.abs(i - crab)
-    end
-    if best == -1 or fuel < best then
-        best = fuel
-    end
+local fuel = 0
+for j, crab in ipairs(crabs) do
+    fuel = fuel + math.abs(crabs[math.floor(#crabs / 2)] - crab)
 end
 
-print(best)
+print(fuel)
