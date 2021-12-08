@@ -21,8 +21,13 @@ Languages planned to use:
 - [ ] 15. Crystal
 - [ ] 16. Haskell
 - [ ] 17. D
-- [ ] 18. C++
+- [ ] 18. Ada
 - [ ] 19. F#
 - [ ] 20. Elixir
+- [ ] 21. Nim
+- [ ] 22. R
+- [ ] 23. Perl
+- [ ] 24. C++
+- [ ] 25. x86 Assembly (Uh Oh)
 
 ????????
