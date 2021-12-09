@@ -11,7 +11,7 @@ Languages planned to use:
 - [x] 5. Rust
 - [x] 6. Dart
 - [x] 7. Lua
-- [ ] 8. Go
+- [x] 8. Go
 - [ ] 9. PHP
 - [ ] 10. Swift
 - [ ] 11. C#
