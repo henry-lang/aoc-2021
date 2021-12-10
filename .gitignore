@@ -11,6 +11,8 @@
 6b.exe
 8a
 8b
+10a
+10b
 # node stuff
 # i'm not using any libraries other than the ones that come with node, but i need @types/node
 node_modules
