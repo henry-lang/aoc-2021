@@ -13,13 +13,18 @@
 8b
 10a
 10b
+bin
+# dotnet
+obj
+aoc-2021.csproj
 # node stuff
 # i'm not using any libraries other than the ones that come with node, but i need @types/node
 node_modules
 package-lock.json
 package.json
 .prettierrc
-
 # random programming language testing
 test.*
 test
+# apple moment
+.DS_Store
