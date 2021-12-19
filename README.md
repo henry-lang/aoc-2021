@@ -14,9 +14,9 @@ Languages planned to use:
 - [x] 8. Go
 - [x] 9. PHP
 - [x] 10. Swift
-- [ ] 11. C#
+- [x] 11. C#
 - [ ] 12. Zig
-- [ ] 13. Ruby
+- [x] 13. Ruby
 - [ ] 14. Julia
 - [ ] 15. Crystal
 - [ ] 16. Haskell
